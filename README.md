@@ -10,7 +10,7 @@ Add the following dependency to your pom.xml:
 <dependency>
     <groupId>com.docsdk</groupId>
     <artifactId>docsdk-java</artifactId>
-    <version>1.0</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 
