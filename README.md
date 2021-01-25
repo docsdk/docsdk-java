@@ -1,6 +1,6 @@
-## docsdk-java
+# docsdk-java
 
-This is the official Java SDK v2 for the [DocSDK](https://docsdk.com/api/v2) _API v2_.
+> This is the official Java SDK v2 for the [DocSDK](https://docsdk.com/api/v2) _API v2_.
 
 ## Installation
 Add the following dependency to your pom.xml:
