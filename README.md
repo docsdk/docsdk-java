@@ -1,7 +1,5 @@
 ## docsdk-java
 
-[![Build Status](https://travis-ci.org/docsdk/docsdk-java.svg?branch=master)](https://travis-ci.org/docsdk/docsdk-java)
-
 This is the official Java SDK v2 for the [DocSDK](https://docsdk.com/api/v2) _API v2_.
 
 ## Installation
