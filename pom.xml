@@ -7,7 +7,7 @@
 
     <groupId>com.docsdk</groupId>
     <artifactId>docsdk-java</artifactId>
-    <version>1.0.3</version>
+    <version>2.0.3</version>
 
     <name>docsdk-java</name>
     <description>DocSDK is an online file converter API - more than 200 different audio, video, document, ebook, archive, image, spreadsheet and presentation formats supported.</description>
