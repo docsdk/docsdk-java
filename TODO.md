@@ -1,6 +1,6 @@
 We need a Java API SDK for an existing REST API.
 
-The API docs are available at: https://docsdk.com/api/v2
+The API docs are available at: http://www.9yuntu.cn/v2/ApiDoc
 
 There are already PHP, node.js and Python SDKs available:
 https://github.com/docsdk/docsdk-php
