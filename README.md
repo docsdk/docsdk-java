@@ -1,6 +1,6 @@
 # docsdk-java
 
-> This is the official Java SDK v2 for the [DocSDK](https://docsdk.com/api/v2) _API v2_.
+> This is the official Java SDK v2 for the [DocSDK](http://www.9yuntu.cn/v2/ApiDoc) _API v2_.
 
 ## Installation
 Add the following dependency to your pom.xml:
@@ -222,5 +222,5 @@ By default, this runs the integration tests against the Sandbox API with an offi
     3a3b4d07338b51db19056a73a89a186b  odt-test-file-2.odt
 
 ## Resources
-* [API v2 Documentation](https://docsdk.com/api/v2)
-* [DocSDK Blog](https://docsdk.com/blog)
+* [API v2 Documentation](http://www.9yuntu.cn/v2/ApiDoc)
+* [DocSDK home page](https://www.docsdk.com/home)
