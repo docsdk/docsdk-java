@@ -55,6 +55,11 @@ public class TaskResponse extends Response {
     private String code;
 
     /**
+     * The token of the task processing.
+     */
+    private String token;
+
+    /**
      * The amount of conversion minutes the task consumed. Available when the status is finished.
      */
     private Integer credits;

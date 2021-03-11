@@ -56,11 +56,6 @@ public class JobResponse extends Response {
      */
     private Links links;
 
-    /**
-     * The token of the file.
-     */
-    private String token;
-
 
     @Getter
     @Setter
