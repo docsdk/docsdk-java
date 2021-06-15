@@ -229,4 +229,5 @@ $ mvn clean install -U -Pintegration-tests
 
 ## 其他参考
 * [API v2 文档](http://www.9yuntu.cn/v2/ApiDoc)
+* [API v2 Documentation](https://docsdk.com/docAPI)
 * [DocSDK 主页](https://www.docsdk.com/home)
