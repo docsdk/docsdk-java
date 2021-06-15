@@ -228,6 +228,5 @@ $ mvn clean install -U -Pintegration-tests
     3a3b4d07338b51db19056a73a89a186b  odt-test-file-2.odt
 
 ## 其他参考
-* [API v2 文档](http://www.9yuntu.cn/v2/ApiDoc)
-* [API v2 Documentation](https://docsdk.com/docAPI)
+* [API v2 文档](https://docsdk.com/docAPI)
 * [DocSDK 主页](https://www.docsdk.com/home)
