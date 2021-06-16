@@ -5,18 +5,17 @@
 <h1 align="center">DocSDK</h1>
 <p align="center">A development kit for smart file (document) conversion</p>
 <p align="center">English | <a href="doc/README-zh-CN.md">中文</a></p>
-<br>
 
-# About DocSDK
+## About DocSDK
 > DocSDK is a development kit for smart file conversion. We support the conversion of various types of documents, including pdf, doc, docx, xls, xlsx, ppt, pptx, dwg, caj, svg, html, json, png, jpg, gif and other formats, more conversion formats can be viewed on our [website](https://www.docsdk.com/). There are 8 kinds of SDK support, including Java, Node.js, PHP, Python, Swift, CLI, AWS-Lambda and Laravel.
 > 
 > **Keywords: document conversion, file conversion, PDF to Word, PDF to PPT, PDF to HTML, JavaSDK**
 
-# docsdk-java
+## docsdk-java
 
 > This is the official Java SDK for the [DocSDK API](https://www.docsdk.com/docAPI#sdk).
 
-## Installation
+### Installation
 Add the following dependency to your pom.xml:
 ```
 <dependency>
@@ -26,7 +25,7 @@ Add the following dependency to your pom.xml:
 </dependency>
 ```
 
-## Creating API Client
+### Creating API Client
 
 ###### Configuration
 By default, API Key and Webhook Signing Secret are being read from `application.properties` file
@@ -73,7 +72,7 @@ new AsyncDocSDKClient(new StringSettingsProvider("api-key", "webhook-signing-sec
 new AsyncDocSDKClient(new SystemPropertySettingsProvider());
 ```
 
-## Creating Jobs
+### Creating Jobs
 
 ###### Default (synchronous) client
 ```java
@@ -127,7 +126,7 @@ final JobResponse waitJobResponse = asyncDocSDKClient.jobs().wait(jobId).get().g
 final String exportUrlTaskId = waitJobResponse.getTasks().stream().filter(taskResponse -> taskResponse.getName().equals("ExportResult")).findFirst().get().getId();
 ```
 
-## Downloading Files
+### Downloading Files
 DocSDK can generate public URLs using `export/url` tasks. You can use these URLs to download output files.
 
 ###### Default (synchronous) client
@@ -164,7 +163,7 @@ OutputStream outputStream = new FileOutputStream(new File(filename));
 IOUtils.copy(inputStream, outputStream);
 ```
 
-## Uploading Files
+### Uploading Files
 Uploads to DocSDK are done via `import/upload` tasks.
 This SDK offers a convenient upload method:
 
@@ -198,6 +197,6 @@ final TaskResponse uploadImportTaskResponse = asyncDocSDKClient.importUsing().up
 final TaskResponse waitUploadImportTaskResponse = asyncDocSDKClient.tasks().wait(uploadImportTaskResponse.getId()).get().getBody();
 ```
 
-## Resources
+### Resources
 * [DocSDK API Documentation](https://www.docsdk.com/docAPI)
 * [DocSDK home page](https://www.docsdk.com/)
