@@ -76,7 +76,8 @@ final JobResponse createJobResponse = docSDKClient.jobs().create(
     ImmutableMap.of(
         "ImportURL", new UrlImportRequest().setUrl("https://file-url"),
         "ConvertFile", new ConvertFilesTaskRequest()
-                    .setInput("ImportURL"),
+                    .setInput("ImportURL")
+                    .setOutputFormat("pdf"),
         "ExportResult", new UrlExportRequest().setInput("ConvertFile")
     )
 ).getBody();
@@ -102,8 +103,7 @@ final JobResponse createJobResponse = asyncDocSDKClient.jobs().create(
         "ImportURL", new UrlImportRequest().setUrl("https://file-url"),
         "ConvertFile", new ConvertFilesTaskRequest()
                     .setInput("ImportURL")
-                    .set("width", 100)
-                    .set("height", 100),
+                    .setOutputFormat("pdf"),
         "ExportResult", new UrlExportRequest().setInput("ConvertFile")
     )
 ).get().getBody();
@@ -115,7 +115,7 @@ final String jobId = createJobResponse.getId();
 final JobResponse waitJobResponse = asyncDocSDKClient.jobs().wait(jobId).get().getBody();
 
 // Get an export/url task id
-final String exportUrlTaskId = waitJobResponse.getTasks().stream().filter(taskResponse -> taskResponse.getName().equals("export-my-file")).findFirst().get().getId();
+final String exportUrlTaskId = waitJobResponse.getTasks().stream().filter(taskResponse -> taskResponse.getName().equals("ExportResult")).findFirst().get().getId();
 ```
 
 ## 下载文件
