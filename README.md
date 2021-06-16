@@ -1,11 +1,11 @@
 # 关于 DocSDK
-> DocSDK 是一个智能文件转换的工具包。我们支持各类文档的转换，其中包括 pdf、doc、docx、xls、xlsx、ppt、pptx、dwg、caj、svg、html、json、png、jpg 和 gif 等等各种格式的转换，更多转换格式可查看我们的[新版首页](http://www.docsdk.com/home) 。现有八种 SDK 的支持，其中包括 Java、Node.js、PHP、Python、Swift、CLI、AWS-Lambda 和 Laravel。
+> DocSDK 是一个智能文件转换的工具包。我们支持各类文档的转换，其中包括 pdf、doc、docx、xls、xlsx、ppt、pptx、dwg、caj、svg、html、json、png、jpg 和 gif 等等各种格式的转换，更多转换格式可查看[九云图网站](https://www.docsdk.com/) 。现有八种 SDK 的支持，其中包括 Java、Node.js、PHP、Python、Swift、CLI、AWS-Lambda 和 Laravel。
 > 
 > **关键词： 文档转换，文件转换，PDF转Word，PDF转PPT，PDF转HTML，JavaSDK**
 
 # docsdk-java
 
-> 这是 [九云图 DocSDK](http://www.9yuntu.cn/v2/ApiDoc) _API v2_ 官方的 Java 开发工具包.
+> 这是 [九云图 DocSDK API](https://www.docsdk.com/docAPI#sdk) 官方的 Java 开发工具包.
 
 ## 安装
 添加以下依赖到 pom.xml:
@@ -189,41 +189,6 @@ final TaskResponse uploadImportTaskResponse = asyncDocSDKClient.importUsing().up
 final TaskResponse waitUploadImportTaskResponse = asyncDocSDKClient.tasks().wait(uploadImportTaskResponse.getId()).get().getBody();
 ```
 
-## 签署 Webhook
-可以验证从 DocSDK 收到的 Webhook 请求。
-
-```java
-// Create a client
-final DocSDKClient docSDKClient = new DocSDKClient();
-
-// The JSON payload from the raw request body.
-final String payload = "payload";
-
-// The value of the "DocSDK-Signature" header.
-final String signature = "signature";
-
-// Returns true if signature is valid, and false if signature is invalid
-final boolean isValid = docSDKClient.webhooks().verify(payload, signature);
-```
-
-## 单元测试
-```
-$ mvn clean install -U -Punit-tests
-```
-
-## 集成测试
-```
-$ mvn clean install -U -Pintegration-tests
-```
-
-默认情况下，这会使用官方 DocSDK 帐户针对 Sandbox API 运行集成测试。 如果您想使用自己的帐户，则可以在 `application.properties` 文件中设置API密钥。
-在这种情况下，您需要将以下用于 Sandbox API 的 MD5 hash 值添加到白名单（使用 DocSDK 仪表板）。
-
-    07db6477193bf8313e8082a1e1b5eaf6  image-test-file-1.jpg
-    7ef166ecc65949f6f2e7eb94a3dac0d4  image-test-file-2.jpg
-    ccbb000ef5bd9dad0fab600d2fff02fb  odt-test-file-1.odt
-    3a3b4d07338b51db19056a73a89a186b  odt-test-file-2.odt
-
 ## 其他参考
-* [API v2 文档](https://docsdk.com/docAPI)
+* [DocSDK API 文档](https://www.docsdk.com/docAPI)
 * [DocSDK 主页](https://www.docsdk.com/home)
