@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="144px" src="https://yuntu-images.oss-cn-hangzhou.aliyuncs.com/xlogo.jpg" />
+  <img width="108px" src="https://yuntu-images.oss-cn-hangzhou.aliyuncs.com/xlogo.jpg" />
 </p>
 
 <h1 align="center">DocSDK</h1>
