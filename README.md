@@ -3,7 +3,6 @@
 </p>
 
 <h1 align="center">DocSDK</h1>
-<p align="center">A smart file (document) conversion development kit</p>
 <p align="center">English | <a href="doc/README-zh-CN.md">中文</a></p>
 
 ## About DocSDK
