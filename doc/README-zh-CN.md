@@ -5,18 +5,17 @@
 <h1 align="center">DocSDK</h1>
 <p align="center">一个智能文件（文档）转换的开发工具包</p>
 <p align="center"><a href="README.md">English</a> | 中文</p>
-<br>
 
-# 关于 DocSDK
+## 关于 DocSDK
 > DocSDK 是一个智能文件转换的开发工具包。我们支持各类文档的转换，其中包括 pdf、doc、docx、xls、xlsx、ppt、pptx、dwg、caj、svg、html、json、png、jpg 和 gif 等等各种格式的转换，更多转换格式可查看[九云图网站](https://www.docsdk.com/) 。现有八种 SDK 的支持，其中包括 Java、Node.js、PHP、Python、Swift、CLI、AWS-Lambda 和 Laravel。
 > 
 > **关键词： 文档转换，文件转换，PDF转Word，PDF转PPT，PDF转HTML，JavaSDK**
 
-# docsdk-java
+## docsdk-java
 
 > 这是 [九云图 DocSDK API](https://www.docsdk.com/docAPI#sdk) 官方的 Java 开发工具包.
 
-## 安装
+### 安装
 添加以下依赖到 pom.xml:
 ```
 <dependency>
@@ -26,7 +25,7 @@
 </dependency>
 ```
 
-## 创建 API Client
+### 创建 API Client
 
 ###### 配置
 默认情况下 API Key 和 Webhook Signing Secret 是从 `application.properties` 文件读取的
@@ -73,7 +72,7 @@ new AsyncDocSDKClient(new StringSettingsProvider("api-key", "webhook-signing-sec
 new AsyncDocSDKClient(new SystemPropertySettingsProvider());
 ```
 
-## 创建 Jobs
+### 创建 Jobs
 
 ###### 默认（同步） client
 ```java
@@ -127,7 +126,7 @@ final JobResponse waitJobResponse = asyncDocSDKClient.jobs().wait(jobId).get().g
 final String exportUrlTaskId = waitJobResponse.getTasks().stream().filter(taskResponse -> taskResponse.getName().equals("ExportResult")).findFirst().get().getId();
 ```
 
-## 下载文件
+### 下载文件
 DocSDK 可以使用 `export/url` 生成公开的链接，您可以使用这些URL下载输出文件。
 
 ###### 默认（同步） client
@@ -164,7 +163,7 @@ OutputStream outputStream = new FileOutputStream(new File(filename));
 IOUtils.copy(inputStream, outputStream);
 ```
 
-## 上传文件
+### 上传文件
 通过 `import/upload` 上传文件.
 这是一种简单的上传方法：
 
@@ -198,6 +197,6 @@ final TaskResponse uploadImportTaskResponse = asyncDocSDKClient.importUsing().up
 final TaskResponse waitUploadImportTaskResponse = asyncDocSDKClient.tasks().wait(uploadImportTaskResponse.getId()).get().getBody();
 ```
 
-## 其他参考
+### 其他参考
 * [DocSDK API 文档](https://www.docsdk.com/docAPI)
 * [DocSDK 主页](https://www.docsdk.com)
