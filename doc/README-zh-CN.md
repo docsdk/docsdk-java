@@ -164,7 +164,7 @@ IOUtils.copy(inputStream, outputStream);
 ```
 
 ### 上传文件
-通过 `import/upload` 上传文件.
+可通过 `import/upload` 上传文件。
 这是一种简单的上传方法：
 
 ###### 默认（同步） client
@@ -197,6 +197,6 @@ final TaskResponse uploadImportTaskResponse = asyncDocSDKClient.importUsing().up
 final TaskResponse waitUploadImportTaskResponse = asyncDocSDKClient.tasks().wait(uploadImportTaskResponse.getId()).get().getBody();
 ```
 
-### 其他参考
+### 参考资源
 * [DocSDK API 文档](https://www.docsdk.com/docAPI)
 * [DocSDK 主页](https://www.docsdk.com)
