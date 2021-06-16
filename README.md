@@ -199,3 +199,8 @@ final TaskResponse waitUploadImportTaskResponse = asyncDocSDKClient.tasks().wait
 ### Resources
 * [DocSDK API Documentation](https://www.docsdk.com/docAPI)
 * [DocSDK home page](https://www.docsdk.com/)
+
+### 关于 DocSDK
+> DocSDK 是一个在线文件转换的开发工具包。我们支持各类文档的转换，其中包括 pdf、doc、docx、xls、xlsx、ppt、pptx、dwg、caj、svg、html、json、png、jpg 和 gif 等等各种格式的转换，更多转换格式可查看[网站](https://www.docsdk.com/) 。现有八种 SDK 的支持，其中包括 Java、Node.js、PHP、Python、Swift、CLI、AWS-Lambda 和 Laravel。
+> 
+> **关键词： 文档转换，文件转换，PDF转Word，PDF转PPT，PDF转HTML，JavaSDK**
