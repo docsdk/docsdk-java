@@ -1,14 +1,23 @@
-# 关于 DocSDK
-> DocSDK 是一个智能文件转换的工具包。我们支持各类文档的转换，其中包括 pdf、doc、docx、xls、xlsx、ppt、pptx、dwg、caj、svg、html、json、png、jpg 和 gif 等等各种格式的转换，更多转换格式可查看[九云图网站](https://www.docsdk.com/) 。现有八种 SDK 的支持，其中包括 Java、Node.js、PHP、Python、Swift、CLI、AWS-Lambda 和 Laravel。
+<p align="center">
+  <img width="108px" src="https://yuntu-images.oss-cn-hangzhou.aliyuncs.com/xlogo.jpg" />
+</p>
+
+<h1 align="center">DocSDK</h1>
+<p align="center">A development kit for smart file (document) conversion</p>
+<p align="center">English | <a href="doc/README-zh-CN.md">中文</a></p>
+<br>
+
+# About DocSDK
+> DocSDK is a development kit for smart file conversion. We support the conversion of various types of documents, including pdf, doc, docx, xls, xlsx, ppt, pptx, dwg, caj, svg, html, json, png, jpg, gif and other formats, more conversion formats can be viewed on our [website](https://www.docsdk.com/). There are 8 kinds of SDK support, including Java, Node.js, PHP, Python, Swift, CLI, AWS-Lambda and Laravel.
 > 
-> **关键词： 文档转换，文件转换，PDF转Word，PDF转PPT，PDF转HTML，JavaSDK**
+> **Keywords: document conversion, file conversion, PDF to Word, PDF to PPT, PDF to HTML, JavaSDK**
 
 # docsdk-java
 
-> 这是 [九云图 DocSDK API](https://www.docsdk.com/docAPI#sdk) 官方的 Java 开发工具包.
+> This is the official Java SDK for the [DocSDK API](https://www.docsdk.com/docAPI#sdk).
 
-## 安装
-添加以下依赖到 pom.xml:
+## Installation
+Add the following dependency to your pom.xml:
 ```
 <dependency>
     <groupId>com.docsdk</groupId>
@@ -17,18 +26,18 @@
 </dependency>
 ```
 
-## 创建 API Client
+## Creating API Client
 
-###### 配置
-默认情况下 API Key 和 Webhook Signing Secret 是从 `application.properties` 文件读取的
+###### Configuration
+By default, API Key and Webhook Signing Secret are being read from `application.properties` file
 ```properties
 DOCSDK_API_KEY=<api-key>
 DOCSDK_WEBHOOK_SIGNING_SECRET=<secret>
 ```
-可以使用环境变量，自定义属性文件，系统属性和字符串变量来提供上述配置。
-对于所有选项，应使用 `DOCSDK_API_KEY` 和 `DOCSDK_WEBHOOK_SIGNING_SECRET` 变量名称。
+It is also possible to provide configuration above using environment variables, custom properties file, system properties and string variables.
+For all options, `DOCSDK_API_KEY` and `DOCSDK_WEBHOOK_SIGNING_SECRET` variable names should be used.
 
-###### 默认（同步） client
+###### Default (synchronous) client
 ```java
 // Using configuration from `application.properties` file
 new DocSDKClient();
@@ -46,7 +55,7 @@ new DocSDKClient(new StringSettingsProvider("api-key", "webhook-signing-secret",
 new DocSDKClient(new SystemPropertySettingsProvider()); 
 ```
 
-###### 异步 client
+###### Asynchronous client
 ```java
 // Using configuration from `application.properties` file
 new AsyncDocSDKClient();
@@ -64,9 +73,9 @@ new AsyncDocSDKClient(new StringSettingsProvider("api-key", "webhook-signing-sec
 new AsyncDocSDKClient(new SystemPropertySettingsProvider());
 ```
 
-## 创建 Jobs
+## Creating Jobs
 
-###### 默认（同步） client
+###### Default (synchronous) client
 ```java
 // Create a client
 final DocSDKClient docSDKClient = new DocSDKClient();
@@ -92,7 +101,7 @@ final JobResponse waitJobResponse = docSDKClient.jobs().wait(jobId).getBody();
 final String exportUrlTaskId = waitJobResponse.getTasks().stream().filter(taskResponse -> taskResponse.getName().equals("ExportResult")).findFirst().get().getId();
 ```
 
-###### 异步 client
+###### Asynchronous client
 ```java
 // Create a client
 final AsyncDocSDKClient asyncDocSDKClient = new AsyncDocSDKClient();
@@ -118,10 +127,10 @@ final JobResponse waitJobResponse = asyncDocSDKClient.jobs().wait(jobId).get().g
 final String exportUrlTaskId = waitJobResponse.getTasks().stream().filter(taskResponse -> taskResponse.getName().equals("ExportResult")).findFirst().get().getId();
 ```
 
-## 下载文件
-DocSDK 可以使用 `export/url` 生成公开的链接，您可以使用这些URL下载输出文件。
+## Downloading Files
+DocSDK can generate public URLs using `export/url` tasks. You can use these URLs to download output files.
 
-###### 默认（同步） client
+###### Default (synchronous) client
 ```java
 // Wait for an export/url task to be finished
 final TaskResponse waitUrlExportTaskResponse = docSDKClient.tasks().wait(exportUrlTaskId).getBody();
@@ -138,7 +147,7 @@ OutputStream outputStream = new FileOutputStream(new File(filename));
 IOUtils.copy(inputStream, outputStream);
 ```
 
-###### 异步 client
+###### Asynchronous client
 ```java
 // Wait for an export/url task to be finished
 final TaskResponse waitUrlExportTaskResponse = asyncDocSDKClient.tasks().wait(exportUrlTaskId).get().getBody();
@@ -155,11 +164,11 @@ OutputStream outputStream = new FileOutputStream(new File(filename));
 IOUtils.copy(inputStream, outputStream);
 ```
 
-## 上传文件
-通过 `import/upload` 上传文件.
-这是一种简单的上传方法：
+## Uploading Files
+Uploads to DocSDK are done via `import/upload` tasks.
+This SDK offers a convenient upload method:
 
-###### 默认（同步） client
+###### Default (synchronous) client
 ```java
 // Create a client
 final DocSDKClient docSDKClient = new DocSDKClient();
@@ -174,7 +183,7 @@ final TaskResponse uploadImportTaskResponse = docSDKClient.importUsing().upload(
 final TaskResponse waitUploadImportTaskResponse = docSDKClient.tasks().wait(uploadImportTaskResponse.getId()).getBody();
 ```
 
-###### 异步 client
+###### Asynchronous client
 ```java
 // Create a client
 final AsyncDocSDKClient asyncDocSDKClient = new DocSDKClient();
@@ -189,6 +198,6 @@ final TaskResponse uploadImportTaskResponse = asyncDocSDKClient.importUsing().up
 final TaskResponse waitUploadImportTaskResponse = asyncDocSDKClient.tasks().wait(uploadImportTaskResponse.getId()).get().getBody();
 ```
 
-## 其他参考
-* [DocSDK API 文档](https://www.docsdk.com/docAPI)
-* [DocSDK 主页](https://www.docsdk.com/home)
+## Resources
+* [DocSDK API Documentation](https://www.docsdk.com/docAPI)
+* [DocSDK home page](https://www.docsdk.com/)

@@ -1,9 +1,23 @@
+<p align="center">
+  <img width="108px" src="https://yuntu-images.oss-cn-hangzhou.aliyuncs.com/xlogo.jpg" />
+</p>
+
+<h1 align="center">DocSDK</h1>
+<p align="center">一个智能文件（文档）转换的开发工具包</p>
+<p align="center"><a href="README.md">English</a> | 中文</p>
+<br>
+
+# 关于 DocSDK
+> DocSDK 是一个智能文件转换的开发工具包。我们支持各类文档的转换，其中包括 pdf、doc、docx、xls、xlsx、ppt、pptx、dwg、caj、svg、html、json、png、jpg 和 gif 等等各种格式的转换，更多转换格式可查看[九云图网站](https://www.docsdk.com/) 。现有八种 SDK 的支持，其中包括 Java、Node.js、PHP、Python、Swift、CLI、AWS-Lambda 和 Laravel。
+> 
+> **关键词： 文档转换，文件转换，PDF转Word，PDF转PPT，PDF转HTML，JavaSDK**
+
 # docsdk-java
 
-> This is the official Java SDK v2 for the [DocSDK](http://www.9yuntu.cn/v2/ApiDoc) _API v2_.
+> 这是 [九云图 DocSDK API](https://www.docsdk.com/docAPI#sdk) 官方的 Java 开发工具包.
 
-## Installation
-Add the following dependency to your pom.xml:
+## 安装
+添加以下依赖到 pom.xml:
 ```
 <dependency>
     <groupId>com.docsdk</groupId>
@@ -12,19 +26,18 @@ Add the following dependency to your pom.xml:
 </dependency>
 ```
 
-## Creating API Client
+## 创建 API Client
 
-###### Configuration
-By default, API Key, Sandbox and Webhook Signing Secret are being read from `application.properties` file
+###### 配置
+默认情况下 API Key 和 Webhook Signing Secret 是从 `application.properties` 文件读取的
 ```properties
 DOCSDK_API_KEY=<api-key>
-DOCSDK_SANDBOX=<true|false>
 DOCSDK_WEBHOOK_SIGNING_SECRET=<secret>
 ```
-It is also possible to provide configuration above using environment variables, custom properties file, system properties and string variables.
-For all options, `DOCSDK_API_KEY`, `DOCSDK_SANDBOX` and `DOCSDK_WEBHOOK_SIGNING_SECRET` variable names should be used.
+可以使用环境变量，自定义属性文件，系统属性和字符串变量来提供上述配置。
+对于所有选项，应使用 `DOCSDK_API_KEY` 和 `DOCSDK_WEBHOOK_SIGNING_SECRET` 变量名称。
 
-###### Default (synchronous) client
+###### 默认（同步） client
 ```java
 // Using configuration from `application.properties` file
 new DocSDKClient();
@@ -36,13 +49,13 @@ new DocSDKClient(new EnvironmentVariableSettingsProvider());
 new DocSDKClient(new PropertyFileSettingsProvider("custom.properties"));
 
 // Using configuration from string variables
-new DocSDKClient(new StringSettingsProvider("api-url", "webhook-signing-secret", false));
+new DocSDKClient(new StringSettingsProvider("api-key", "webhook-signing-secret", false));
 
 // Using configuration from system properties
 new DocSDKClient(new SystemPropertySettingsProvider()); 
 ```
 
-###### Asynchronous client
+###### 异步 client
 ```java
 // Using configuration from `application.properties` file
 new AsyncDocSDKClient();
@@ -54,15 +67,15 @@ new AsyncDocSDKClient(new EnvironmentVariableSettingsProvider());
 new AsyncDocSDKClient(new PropertyFileSettingsProvider("custom.properties"));
 
 // Using configuration from string variables
-new AsyncDocSDKClient(new StringSettingsProvider("api-url", "webhook-signing-secret", false));
+new AsyncDocSDKClient(new StringSettingsProvider("api-key", "webhook-signing-secret", false));
 
 // Using configuration from system properties
 new AsyncDocSDKClient(new SystemPropertySettingsProvider());
 ```
 
-## Creating Jobs
+## 创建 Jobs
 
-###### Default (synchronous) client
+###### 默认（同步） client
 ```java
 // Create a client
 final DocSDKClient docSDKClient = new DocSDKClient();
@@ -70,12 +83,11 @@ final DocSDKClient docSDKClient = new DocSDKClient();
 // Create a job
 final JobResponse createJobResponse = docSDKClient.jobs().create(
     ImmutableMap.of(
-        "import-my-file", new UrlImportRequest().setUrl("import-url"),
-        "convert-my-file", new ConvertFilesTaskRequest()
-                    .setInput("import-my-file")
-                    .set("width", 100)
-                    .set("height", 100),
-        "export-my-file", new UrlExportRequest().setInput("convert-my-file")
+        "ImportURL", new UrlImportRequest().setUrl("https://file-url"),
+        "ConvertFile", new ConvertFilesTaskRequest()
+                    .setInput("ImportURL")
+                    .setOutputFormat("pdf"),
+        "ExportResult", new UrlExportRequest().setInput("ConvertFile")
     )
 ).getBody();
 
@@ -86,10 +98,10 @@ final String jobId = createJobResponse.getId();
 final JobResponse waitJobResponse = docSDKClient.jobs().wait(jobId).getBody();
 
 // Get an export/url task id
-final String exportUrlTaskId = waitJobResponse.getTasks().stream().filter(taskResponse -> taskResponse.getName().equals("export-my-file")).findFirst().get().getId();
+final String exportUrlTaskId = waitJobResponse.getTasks().stream().filter(taskResponse -> taskResponse.getName().equals("ExportResult")).findFirst().get().getId();
 ```
 
-###### Asynchronous client
+###### 异步 client
 ```java
 // Create a client
 final AsyncDocSDKClient asyncDocSDKClient = new AsyncDocSDKClient();
@@ -97,12 +109,11 @@ final AsyncDocSDKClient asyncDocSDKClient = new AsyncDocSDKClient();
 // Create a job
 final JobResponse createJobResponse = asyncDocSDKClient.jobs().create(
     ImmutableMap.of(
-        "import-my-file", new UrlImportRequest().setUrl("import-url"),
-        "convert-my-file", new ConvertFilesTaskRequest()
-                    .setInput("import-my-file")
-                    .set("width", 100)
-                    .set("height", 100),
-        "export-my-file", new UrlExportRequest().setInput("convert-my-file")
+        "ImportURL", new UrlImportRequest().setUrl("https://file-url"),
+        "ConvertFile", new ConvertFilesTaskRequest()
+                    .setInput("ImportURL")
+                    .setOutputFormat("pdf"),
+        "ExportResult", new UrlExportRequest().setInput("ConvertFile")
     )
 ).get().getBody();
 
@@ -113,13 +124,13 @@ final String jobId = createJobResponse.getId();
 final JobResponse waitJobResponse = asyncDocSDKClient.jobs().wait(jobId).get().getBody();
 
 // Get an export/url task id
-final String exportUrlTaskId = waitJobResponse.getTasks().stream().filter(taskResponse -> taskResponse.getName().equals("export-my-file")).findFirst().get().getId();
+final String exportUrlTaskId = waitJobResponse.getTasks().stream().filter(taskResponse -> taskResponse.getName().equals("ExportResult")).findFirst().get().getId();
 ```
 
-## Downloading Files
-DocSDK can generate public URLs using `export/url` tasks. You can use these URLs to download output files.
+## 下载文件
+DocSDK 可以使用 `export/url` 生成公开的链接，您可以使用这些URL下载输出文件。
 
-###### Default (synchronous) client
+###### 默认（同步） client
 ```java
 // Wait for an export/url task to be finished
 final TaskResponse waitUrlExportTaskResponse = docSDKClient.tasks().wait(exportUrlTaskId).getBody();
@@ -136,7 +147,7 @@ OutputStream outputStream = new FileOutputStream(new File(filename));
 IOUtils.copy(inputStream, outputStream);
 ```
 
-###### Asynchronous client
+###### 异步 client
 ```java
 // Wait for an export/url task to be finished
 final TaskResponse waitUrlExportTaskResponse = asyncDocSDKClient.tasks().wait(exportUrlTaskId).get().getBody();
@@ -153,11 +164,11 @@ OutputStream outputStream = new FileOutputStream(new File(filename));
 IOUtils.copy(inputStream, outputStream);
 ```
 
-## Uploading Files
-Uploads to DocSDK are done via `import/upload` tasks (see the [docs](https://docsdk.com/api/v2/import#import-upload-tasks)).
-This SDK offers a convenient upload method:
+## 上传文件
+通过 `import/upload` 上传文件.
+这是一种简单的上传方法：
 
-###### Default (synchronous) client
+###### 默认（同步） client
 ```java
 // Create a client
 final DocSDKClient docSDKClient = new DocSDKClient();
@@ -172,7 +183,7 @@ final TaskResponse uploadImportTaskResponse = docSDKClient.importUsing().upload(
 final TaskResponse waitUploadImportTaskResponse = docSDKClient.tasks().wait(uploadImportTaskResponse.getId()).getBody();
 ```
 
-###### Asynchronous client
+###### 异步 client
 ```java
 // Create a client
 final AsyncDocSDKClient asyncDocSDKClient = new DocSDKClient();
@@ -187,40 +198,6 @@ final TaskResponse uploadImportTaskResponse = asyncDocSDKClient.importUsing().up
 final TaskResponse waitUploadImportTaskResponse = asyncDocSDKClient.tasks().wait(uploadImportTaskResponse.getId()).get().getBody();
 ```
 
-## Signing Webhook 
-The node SDK allows to verify webhook requests received from DocSDK.
-
-```java
-// Create a client
-final DocSDKClient docSDKClient = new DocSDKClient();
-
-// The JSON payload from the raw request body.
-final String payload = "payload";
-
-// The value of the "DocSDK-Signature" header.
-final String signature = "signature";
-
-// Returns true if signature is valid, and false if signature is invalid
-final boolean isValid = docSDKClient.webhooks().verify(payload, signature);
-```
-
-## Unit Tests
-```
-$ mvn clean install -U -Punit-tests
-```
-
-## Integration Tests
-```
-$ mvn clean install -U -Pintegration-tests
-```
-
-By default, this runs the integration tests against the Sandbox API with an official DocSDK account. If you would like to use your own account, you can set your API key in the `application.properties` file. In this case you need to whitelist the following MD5 hashes for Sandbox API (using the DocSDK dashboard).
-
-    07db6477193bf8313e8082a1e1b5eaf6  image-test-file-1.jpg
-    7ef166ecc65949f6f2e7eb94a3dac0d4  image-test-file-2.jpg
-    ccbb000ef5bd9dad0fab600d2fff02fb  odt-test-file-1.odt
-    3a3b4d07338b51db19056a73a89a186b  odt-test-file-2.odt
-
-## Resources
-* [API v2 Documentation](http://www.9yuntu.cn/v2/ApiDoc)
-* [DocSDK home page](https://www.docsdk.com/home)
+## 其他参考
+* [DocSDK API 文档](https://www.docsdk.com/docAPI)
+* [DocSDK 主页](https://www.docsdk.com)
