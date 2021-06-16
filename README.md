@@ -20,14 +20,13 @@
 ## 创建 API Client
 
 ###### 配置
-默认情况下, API Key, Sandbox 和 Webhook Signing Secret 是从 `application.properties` 文件读取的
+默认情况下 API Key 和 Webhook Signing Secret 是从 `application.properties` 文件读取的
 ```properties
 DOCSDK_API_KEY=<api-key>
-DOCSDK_SANDBOX=<true|false>
 DOCSDK_WEBHOOK_SIGNING_SECRET=<secret>
 ```
 可以使用环境变量，自定义属性文件，系统属性和字符串变量来提供上述配置。
-对于所有选项，应使用 `DOCSDK_API_KEY`, `DOCSDK_SANDBOX` and `DOCSDK_WEBHOOK_SIGNING_SECRET` 变量名称。
+对于所有选项，应使用 `DOCSDK_API_KEY` 和 `DOCSDK_WEBHOOK_SIGNING_SECRET` 变量名称。
 
 ###### 默认（同步） client
 ```java
@@ -41,7 +40,7 @@ new DocSDKClient(new EnvironmentVariableSettingsProvider());
 new DocSDKClient(new PropertyFileSettingsProvider("custom.properties"));
 
 // Using configuration from string variables
-new DocSDKClient(new StringSettingsProvider("api-url", "webhook-signing-secret", false));
+new DocSDKClient(new StringSettingsProvider("api-key", "webhook-signing-secret", false));
 
 // Using configuration from system properties
 new DocSDKClient(new SystemPropertySettingsProvider()); 
@@ -59,7 +58,7 @@ new AsyncDocSDKClient(new EnvironmentVariableSettingsProvider());
 new AsyncDocSDKClient(new PropertyFileSettingsProvider("custom.properties"));
 
 // Using configuration from string variables
-new AsyncDocSDKClient(new StringSettingsProvider("api-url", "webhook-signing-secret", false));
+new AsyncDocSDKClient(new StringSettingsProvider("api-key", "webhook-signing-secret", false));
 
 // Using configuration from system properties
 new AsyncDocSDKClient(new SystemPropertySettingsProvider());
@@ -75,12 +74,10 @@ final DocSDKClient docSDKClient = new DocSDKClient();
 // Create a job
 final JobResponse createJobResponse = docSDKClient.jobs().create(
     ImmutableMap.of(
-        "import-my-file", new UrlImportRequest().setUrl("import-url"),
-        "convert-my-file", new ConvertFilesTaskRequest()
-                    .setInput("import-my-file")
-                    .set("width", 100)
-                    .set("height", 100),
-        "export-my-file", new UrlExportRequest().setInput("convert-my-file")
+        "ImportURL", new UrlImportRequest().setUrl("https://file-url"),
+        "ConvertFile", new ConvertFilesTaskRequest()
+                    .setInput("ImportURL"),
+        "ExportResult", new UrlExportRequest().setInput("ConvertFile")
     )
 ).getBody();
 
@@ -91,7 +88,7 @@ final String jobId = createJobResponse.getId();
 final JobResponse waitJobResponse = docSDKClient.jobs().wait(jobId).getBody();
 
 // Get an export/url task id
-final String exportUrlTaskId = waitJobResponse.getTasks().stream().filter(taskResponse -> taskResponse.getName().equals("export-my-file")).findFirst().get().getId();
+final String exportUrlTaskId = waitJobResponse.getTasks().stream().filter(taskResponse -> taskResponse.getName().equals("ExportResult")).findFirst().get().getId();
 ```
 
 ###### 异步 client
@@ -102,12 +99,12 @@ final AsyncDocSDKClient asyncDocSDKClient = new AsyncDocSDKClient();
 // Create a job
 final JobResponse createJobResponse = asyncDocSDKClient.jobs().create(
     ImmutableMap.of(
-        "import-my-file", new UrlImportRequest().setUrl("import-url"),
-        "convert-my-file", new ConvertFilesTaskRequest()
-                    .setInput("import-my-file")
+        "ImportURL", new UrlImportRequest().setUrl("https://file-url"),
+        "ConvertFile", new ConvertFilesTaskRequest()
+                    .setInput("ImportURL")
                     .set("width", 100)
                     .set("height", 100),
-        "export-my-file", new UrlExportRequest().setInput("convert-my-file")
+        "ExportResult", new UrlExportRequest().setInput("ConvertFile")
     )
 ).get().getBody();
 
