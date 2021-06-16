@@ -4,7 +4,7 @@
 
 <h1 align="center">DocSDK</h1>
 <p align="center">一个智能文件（文档）转换的开发工具包</p>
-<p align="center"><a href="../README.md">English</a> | 中文</p>
+<p align="center"><a href="/README.md">English</a> | 中文</p>
 
 ## 关于 DocSDK
 > DocSDK 是一个智能文件转换的开发工具包。我们支持各类文档的转换，其中包括 pdf、doc、docx、xls、xlsx、ppt、pptx、dwg、caj、svg、html、json、png、jpg 和 gif 等等各种格式的转换，更多转换格式可查看[九云图网站](https://www.docsdk.com/) 。现有八种 SDK 的支持，其中包括 Java、Node.js、PHP、Python、Swift、CLI、AWS-Lambda 和 Laravel。
