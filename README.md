@@ -156,7 +156,7 @@ IOUtils.copy(inputStream, outputStream);
 ```
 
 ## 上传文件
-通过 `import/upload` 上传文件 (请参考 [docs](http://www.9yuntu.cn/v2/ApiDoc)).
+通过 `import/upload` 上传文件.
 这是一种简单的上传方法：
 
 ###### 默认（同步） client
