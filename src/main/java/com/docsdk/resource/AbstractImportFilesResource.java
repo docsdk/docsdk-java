@@ -77,6 +77,10 @@ public abstract class AbstractImportFilesResource<TRAR extends AbstractResult<Ta
         return getHttpUriRequest(HttpPost.class, uri, httpEntity);
     }
 
+    public abstract String uploadFile(File file) throws IOException;
+
+    public abstract String uploadFile(InputStream inputStream, String fileName) throws IOException;
+
     /**
      * Create a task which uploads one input file.
      * It allows your users to directly upload input files to DocSDK, without temporary storing them on your server.
