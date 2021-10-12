@@ -10,7 +10,7 @@ Add the following dependency to your pom.xml:
 <dependency>
     <groupId>com.docsdk</groupId>
     <artifactId>docsdk-java</artifactId>
-    <version>1.0.3</version>
+    <version>2.0.4</version>
 </dependency>
 ```
 
@@ -164,14 +164,10 @@ This SDK offers a convenient upload method:
 // Create a client
 final DocSDKClient docSDKClient = new DocSDKClient();
 
-// File as input stream
-final InputStream inputStream = getClass().getClassLoader().getResourceAsStream("file.jpg");
+// Upload file
+File file = new File("file.jpg");
+String url = docSDKClient.importUsing().uploadFile(file);
 
-// Upload file using import/upload task
-final TaskResponse uploadImportTaskResponse = docSDKClient.importUsing().upload(new UploadImportRequest(), inputStream).getBody();
-
-// Wait for import/upload task to be finished
-final TaskResponse waitUploadImportTaskResponse = docSDKClient.tasks().wait(uploadImportTaskResponse.getId()).getBody();
 ```
 
 ###### Asynchronous client
