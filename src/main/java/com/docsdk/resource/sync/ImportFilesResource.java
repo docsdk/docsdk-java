@@ -13,6 +13,7 @@ import com.docsdk.dto.response.TaskResponse;
 import com.docsdk.dto.result.Result;
 import com.docsdk.executor.RequestExecutor;
 import com.docsdk.resource.AbstractImportFilesResource;
+import com.docsdk.upload.UploadUtil;
 import com.google.common.collect.ImmutableList;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
@@ -93,6 +94,18 @@ public class ImportFilesResource extends AbstractImportFilesResource<Result<Task
         final HttpUriRequest multipartHttpUriRequest = getHttpUriRequest(HttpPost.class, multipartUri, multipartHttpEntity);
 
         return uploadPostProcess(taskId, requestExecutor.execute(multipartHttpUriRequest, VOID_TYPE_REFERENCE));
+    }
+
+    @Override
+    public String uploadFile(File file) throws IOException {
+        String url = UploadUtil.uploadToOSS(file);
+        return url;
+    }
+
+    @Override
+    public String uploadFile(InputStream inputStream, String fileName) throws IOException {
+        String url = UploadUtil.uploadToOSS(inputStream, fileName);
+        return url;
     }
 
     @Override

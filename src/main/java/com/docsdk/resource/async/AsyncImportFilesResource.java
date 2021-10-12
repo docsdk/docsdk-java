@@ -56,6 +56,16 @@ public class AsyncImportFilesResource extends AbstractImportFilesResource<AsyncR
     }
 
     @Override
+    public String uploadFile(File file) throws IOException {
+        return null;
+    }
+
+    @Override
+    public String uploadFile(InputStream inputStream, String fileName) throws IOException {
+        return null;
+    }
+
+    @Override
     public AsyncResult<TaskResponse> upload(
         @NotNull final UploadImportRequest uploadImportRequest
     ) throws IOException, URISyntaxException {
